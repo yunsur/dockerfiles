@@ -10,7 +10,7 @@ jobs:
       IMAGE_NAME: alpine-postgres
     strategy:
       matrix:
-        node: [12, 13]
+        pg_version: [12, 13]
     steps:
       -
         name: Checkout
