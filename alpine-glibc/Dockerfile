@@ -5,7 +5,7 @@ LABEL maintainer="yunsur <yunsur.shi@gmail.com>"
 ARG ALPINE_GLIBC_PKG_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download"
 ARG ALPINE_GLIBC_PKG_VERSION="2.33-r0"
 
-ENV LANG=C.UTF-8
+ENV LANG=zh_CN.UTF-8
 ENV TZ=Asia/Shanghai
 ENV PS1="\u@\h:\w \$ "
 
