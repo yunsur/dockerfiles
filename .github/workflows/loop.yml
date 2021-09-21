@@ -60,20 +60,20 @@ jobs:
             -f Dockerfile \
             .
           IMAGES+=( "${DOCKERHUB_REPOSITORY}:latest-arm-v7" )
-          echo "Build arm64-v8"
+          echo "Build arm64"
           docker buildx build \
             --cache-from "type=local,src=/tmp/.buildx-cache" \
             --cache-to "type=local,dest=/tmp/.buildx-cache" \
             --output "type=image,push=true" \
-            --platform linux/arm64/v8 \
+            --platform linux/arm64 \
             --build-arg "TARGET=aarch64-unknown-linux-musl" \
-            --tag "${DOCKERHUB_REPOSITORY}:latest-arm64-v8" \
+            --tag "${DOCKERHUB_REPOSITORY}:latest-arm64" \
             -f Dockerfile \
             .
-          IMAGES+=( "${DOCKERHUB_REPOSITORY}:latest-arm64-v8" )
+          IMAGES+=( "${DOCKERHUB_REPOSITORY}:latest-arm64" )
           echo "Create manifest lists"
           docker manifest create "${DOCKERHUB_REPOSITORY}:latest" "${IMAGES[@]}"
           docker manifest annotate "${DOCKERHUB_REPOSITORY}:latest" "${DOCKERHUB_REPOSITORY}:latest-arm-v7" --variant "v7"
-          docker manifest annotate "${DOCKERHUB_REPOSITORY}:latest" "${DOCKERHUB_REPOSITORY}:latest-arm64-v8" --variant "v8"
+          docker manifest annotate "${DOCKERHUB_REPOSITORY}:latest" "${DOCKERHUB_REPOSITORY}:latest-arm64"
           echo "Push manifest lists & delete local copies"
           docker manifest push --purge "${DOCKERHUB_REPOSITORY}:latest"
